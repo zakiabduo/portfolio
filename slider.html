@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .con{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        width: 500px;
+        height: 300px;
+    }
+    #card{
+        display: flex;
+        transition: all ease-in-out 0.5s;
+        
+        
+    }
+    img{
+        height: 300px;
+        width: 500px;
+
+    }
+
+    #previous{
+        position: absolute;
+        top: 45%;
+        left: 0;
+        opacity: 1;
+       
+    }
+    #next{
+        position: absolute;
+        top: 45%;
+        right: 0;
+        opacity: 1;
+        
+        
+    }
+</style>
+<body>
+    <div class="con">
+        <div id="card">
+            <img src="images/bg1.jpg" alt="">
+            <img src="images/bg2.jpg" alt="">
+            <img src="images/bg10.jpg" alt="">
+            <img src="images/bg3.jpg" alt="">
+            <img src="images/bg4.jpg" alt="">
+            <img src="images/bg5.jpg" alt="">
+            <img src="images/bg6.jpg" alt="">
+        </div>
+        <button id="previous">left</button>
+        <button id="next">right</button>
+    </div>
+    <script>
+        let previous = document.getElementById("previous");
+      let next = document.getElementById("next");
+      let image_con = document.getElementById("card");
+      let img_tag = document.querySelectorAll("img");
+      let current_image = 1;
+      let set_time;
+      next.onclick = function()
+      {
+        current_image++;
+        clearTimeout(set_time);
+        updateImage();
+      }
+      previous.onclick = function()
+      {
+        current_image--;
+        clearTimeout(set_time);
+        updateImage();
+      }
+      function updateImage(){
+        if (current_image> img_tag.length)
+        {
+          current_image = 1;
+        }
+        else if(current_image < 1){
+          current_image = img_tag.length
+        }
+        image_con.style.transform = "translate(-"+(current_image-1)*500+"px)"
+      
+      set_time = setTimeout(function(){
+        current_image++;
+        updateImage();
+      },3000)
+    }
+    </script>
+</body>
+</html>
